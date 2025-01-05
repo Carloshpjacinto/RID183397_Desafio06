@@ -1,10 +1,22 @@
 import express, {Express} from 'express';
+import { AppDataSource } from './typeorm/data-source';
 
 const app:Express = express();
 
 app.use(express.json());
 
-app.listen(3000, () => {
+const port:number = Number(process.env.PORT)
 
-    console.log(`Rodando o servidor na porta 3000`)
+AppDataSource.initialize().then(() => {
+
+    app.listen(port, () => {
+
+        console.log(`Rodando o servidor na porta 3000`)
+    })
+
+    console.log("Banco de dados inicializado")
+
+}).catch((erro) => {
+
+    console.error("Erro ao iniciar o banco de dados", erro)
 })
