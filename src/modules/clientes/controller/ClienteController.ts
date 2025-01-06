@@ -3,13 +3,13 @@ import CriandoClienteServece from "../services/CriandoClienteServece";
 
 export default class ClienteController{
 
-    public async create(req:Request, res:Response): Promise<void>{
+    public async create(req:Request, res:Response): Promise<Response>{
 
         const {nome_cliente, email, senha, logradouro, endereco, cep, numero_endereco} = req.body;
 
         const criandoCliente = new CriandoClienteServece();
 
-        const cliente = criandoCliente.execute({
+        const cliente = await criandoCliente.execute({
 
             nome_cliente,
             email,
@@ -20,6 +20,6 @@ export default class ClienteController{
             numero_endereco
         })
 
-        res.status(201).json(cliente)
+        return res.status(201).json(cliente)
     }
 }

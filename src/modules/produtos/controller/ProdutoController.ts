@@ -3,19 +3,19 @@ import CriandoProdutoServece from "../services/CriandoProdutoService";
 
 export default class ProdutoController{
 
-    public async create(req:Request, res:Response): Promise<void>{
+    public async create(req:Request, res:Response): Promise<Response>{
 
         const {nome_produto, categoria, preco} = req.body;
 
         const criandoProduto = new CriandoProdutoServece();
 
-        const produto = criandoProduto.execute({
+        const produto = await criandoProduto.execute({
 
             nome_produto,
             categoria,
             preco
         })
 
-        res.status(201).json(produto)
+        return res.status(201).json(produto)
     }
 }

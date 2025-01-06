@@ -3,13 +3,13 @@ import CriandoVendaServece from "../services/CriandoVendasServeces";
 
 export default class VendaController{
 
-    public async create(req:Request, res:Response): Promise<void>{
+    public async create(req:Request, res:Response): Promise<Response>{
 
         const {cod_venda, desconto_produto, valor_venda, qtd_pedido} = req.body;
 
         const criandoVenda = new CriandoVendaServece();
 
-        const venda = criandoVenda.execute({
+        const venda = await criandoVenda.execute({
 
             cod_venda,
             desconto_produto,
@@ -17,6 +17,6 @@ export default class VendaController{
             qtd_pedido
         })
 
-        res.status(201).json(venda)
+        return res.status(201).json(venda)
     }
 }

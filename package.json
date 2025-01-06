@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build/server.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "migration:create": "cross-env MIGRATION_NAME=%npm_config_name% ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create src/typeorm/migrations/%npm_config_name%",
     "migration:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/typeorm/data-source.ts"
   },
@@ -14,6 +14,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/node": "^22.10.5",
     "cross-env": "^7.0.3",
     "ts-node": "^10.9.2",
@@ -23,6 +24,7 @@
   },
   "dependencies": {
     "@types/express": "^5.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "pg": "^8.13.1",

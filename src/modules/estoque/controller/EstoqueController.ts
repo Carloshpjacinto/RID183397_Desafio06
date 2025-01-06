@@ -3,17 +3,17 @@ import CriandoEstoqueServece from "../services/CriandoEstoqueService";
 
 export default class EstoqueController{
 
-    public async create(req:Request, res:Response): Promise<void>{
+    public async create(req:Request, res:Response): Promise<Response>{
 
         const {qtd_estoque} = req.body;
 
         const criandoEstoue = new CriandoEstoqueServece();
 
-        const estoque = criandoEstoue.execute({
+        const estoque = await criandoEstoue.execute({
 
             qtd_estoque
         })
 
-        res.status(201).json(estoque)
+        return res.status(201).json(estoque)
     }
 }
