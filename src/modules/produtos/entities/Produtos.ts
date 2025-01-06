@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import Estoque from "../../estoque/entities/Estoque";
+import { Estoque } from "../../estoque/entities/Estoque";
 
 @Entity('produtos')
-class Produto{
+export class Produto{
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -21,5 +21,3 @@ class Produto{
     preco: number;
 
 }
-
-export default Produto
