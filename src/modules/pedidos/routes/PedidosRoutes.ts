@@ -4,6 +4,6 @@ import PedidoController from "../controller/PedidoController"
 const pedidoRoutes = Router();
 const pedidoController = new PedidoController();
 
-pedidoRoutes.post("/pedidos",pedidoController.create);
+pedidoRoutes.post("/",pedidoController.create);
 
 export default pedidoRoutes;

@@ -4,6 +4,6 @@ import ProdutoController from "../controller/ProdutoController"
 const produtoRouter = Router();
 const produtoController = new ProdutoController();
 
-produtoRouter.post("/produtos",produtoController.create);
+produtoRouter.post("/",produtoController.create);
 
 export default produtoRouter;

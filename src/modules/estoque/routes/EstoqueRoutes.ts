@@ -4,6 +4,6 @@ import EstoqueController from "../controller/EstoqueController"
 const estoqueRoutes = Router();
 const estoqueController = new EstoqueController();
 
-estoqueRoutes.post("/estoque",estoqueController.create);
+estoqueRoutes.post("/",estoqueController.create);
 
 export default estoqueRoutes;
