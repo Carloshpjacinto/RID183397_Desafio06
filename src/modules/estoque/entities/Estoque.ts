@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('estoque')
-class Estoque{
+export class Estoque{
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -9,5 +9,3 @@ class Estoque{
     @Column()
     qtd_estoque: number;
 }
-
-export default Estoque

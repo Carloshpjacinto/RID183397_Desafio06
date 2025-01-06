@@ -1,8 +1,8 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Pedido from "../../pedidos/entities/Pedidos";
+import { Pedido } from "../../pedidos/entities/Pedidos";
 
 @Entity('Vendas')
-class Venda{
+export class Venda{
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -29,5 +29,3 @@ class Venda{
     @UpdateDateColumn()
     data_venda_update: Date;
 }
-
-export default Venda

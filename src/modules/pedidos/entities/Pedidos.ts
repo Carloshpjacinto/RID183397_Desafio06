@@ -1,9 +1,9 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Cliente from "../../clientes/entities/Clientes";
-import Produto from "../../produtos/entities/Produtos";
+import { Cliente } from "../../clientes/entities/Clientes";
+import { Produto } from "../../produtos/entities/Produtos";
 
 @Entity('pedidos')
-class Pedido{
+export class Pedido{
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -25,5 +25,3 @@ class Pedido{
     @UpdateDateColumn()
     data_pedido_update: Date;
 }
-
-export default Pedido
