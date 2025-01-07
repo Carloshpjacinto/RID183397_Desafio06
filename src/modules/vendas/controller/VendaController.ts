@@ -5,7 +5,7 @@ export default class VendaController{
 
     public async create(req:Request, res:Response): Promise<Response>{
 
-        const {cod_venda, desconto_produto, valor_venda, qtd_pedido} = req.body;
+        const {cod_venda, desconto_produto, valor_venda, qtd_vendida, id_pedido} = req.body;
 
         const criandoVenda = new CriandoVendaServece();
 
@@ -14,7 +14,8 @@ export default class VendaController{
             cod_venda,
             desconto_produto,
             valor_venda,
-            qtd_pedido
+            qtd_vendida,
+            id_pedido
         })
 
         return res.status(201).json(venda)

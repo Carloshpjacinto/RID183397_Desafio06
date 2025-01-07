@@ -1,7 +1,7 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Pedido } from "../../pedidos/entities/Pedidos";
 
-@Entity('Vendas')
+@Entity('vendas')
 export class Venda{
 
     @PrimaryGeneratedColumn()
@@ -16,12 +16,12 @@ export class Venda{
     @Column()
     valor_venda: number;
 
-    @ManyToMany(() => Pedido)
+    @OneToOne(() => Pedido)
     @JoinColumn({name: 'id_pedido'})
     pedido: Pedido;
 
     @Column()
-    qtd_pedido: number;
+    qtd_vendida: number;
 
     @CreateDateColumn()
     data_venda: Date;

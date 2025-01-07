@@ -5,7 +5,7 @@ export default class ProdutoController{
 
     public async create(req:Request, res:Response): Promise<Response>{
 
-        const {nome_produto, categoria, preco} = req.body;
+        const {nome_produto, categoria, preco, id_estoque} = req.body;
 
         const criandoProduto = new CriandoProdutoServece();
 
@@ -13,7 +13,8 @@ export default class ProdutoController{
 
             nome_produto,
             categoria,
-            preco
+            preco,
+            id_estoque
         })
 
         return res.status(201).json(produto)

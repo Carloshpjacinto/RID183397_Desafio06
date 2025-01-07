@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Cliente } from "../../clientes/entities/Clientes";
 import { Produto } from "../../produtos/entities/Produtos";
 
@@ -11,11 +11,11 @@ export class Pedido{
     @Column()
     cod_pedido: number;
 
-    @ManyToMany(() => Cliente)
+    @ManyToOne(() => Cliente)
     @JoinColumn({name: 'id_cliente'})
     cliente: Cliente;
 
-    @ManyToMany(() => Produto)
+    @ManyToOne(() => Produto)
     @JoinColumn({name: 'id_produto'})
     produto: Produto;
 
