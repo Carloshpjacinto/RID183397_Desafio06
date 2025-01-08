@@ -21,14 +21,17 @@ export class CreateProdutos1736137020608 implements MigrationInterface {
                     {
                         name: 'categoria',
                         type: 'varchar',
-                        isUnique: true,
                     },
                     {
                         name: 'preco',
                         type: 'decimal',
                         precision: 10,
                         scale: 2,
-                    }
+                    },
+                    {
+                        name: 'desconto',
+                        type: 'varchar',
+                    },
                 ]
             })
         );

@@ -11,6 +11,9 @@ export class Pedido{
     @Column()
     cod_pedido: number;
 
+    @Column()
+    qtd_produto_pedido: number;
+
     @ManyToOne(() => Cliente)
     @JoinColumn({name: 'id_cliente'})
     cliente: Cliente;

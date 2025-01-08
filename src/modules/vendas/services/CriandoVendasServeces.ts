@@ -6,15 +6,13 @@ import { PedidoRepository } from '../../pedidos/repositories/PedidoRepository';
 interface Icriandovenda{
 
     cod_venda: number;
-    desconto_produto: number;
     valor_venda: number;
-    qtd_vendida: number;
     id_pedido: number
 }
 
 export default class CriandoVendaServece{
 
-    async execute({ cod_venda, desconto_produto, valor_venda, qtd_vendida, id_pedido}: Icriandovenda): Promise<Venda>{
+    async execute({ cod_venda, valor_venda, id_pedido}: Icriandovenda): Promise<Venda>{
 
         const pedido = await PedidoRepository.findOneBy({id: id_pedido})
 
@@ -26,9 +24,7 @@ export default class CriandoVendaServece{
         const venda = VendasRepository.create({
 
             cod_venda,
-            desconto_produto,
             valor_venda,
-            qtd_vendida,
             pedido
         })
 

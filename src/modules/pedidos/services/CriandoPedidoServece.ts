@@ -7,6 +7,7 @@ import { ProdutoRepository } from '../../produtos/repositories/ProdutoRepository
 interface IcriandoPedido{
 
     cod_pedido: number;
+    qtd_produto_pedido: number
     id_cliente: number;
     id_produto: number;
 
@@ -14,7 +15,7 @@ interface IcriandoPedido{
 
 export default class CriandoPedidoServece{
 
-    async execute({cod_pedido, id_cliente, id_produto}: IcriandoPedido): Promise<Pedido>{
+    async execute({cod_pedido, qtd_produto_pedido, id_cliente, id_produto}: IcriandoPedido): Promise<Pedido>{
 
         const cliente = await ClienteRepository.findOneBy({id: id_cliente})
         
@@ -31,6 +32,7 @@ export default class CriandoPedidoServece{
         const pedido = PedidoRepository.create({
 
             cod_pedido,
+            qtd_produto_pedido,
             cliente,
             produto
         })

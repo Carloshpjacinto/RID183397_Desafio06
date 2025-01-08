@@ -19,6 +19,10 @@ export class CreatePedidos1736137028394 implements MigrationInterface {
                         type: 'integer',
                     },
                     {
+                        name: 'qtd_produto_pedido',
+                        type: 'integer',
+                    },
+                    {
                         name: 'data_pedido',
                         type: 'timestamp',
                         default: 'now()',

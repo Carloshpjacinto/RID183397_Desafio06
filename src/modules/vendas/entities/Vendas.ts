@@ -11,17 +11,11 @@ export class Venda{
     cod_venda: number;
 
     @Column()
-    desconto_produto: number;
-
-    @Column()
     valor_venda: number;
 
     @OneToOne(() => Pedido)
     @JoinColumn({name: 'id_pedido'})
     pedido: Pedido;
-
-    @Column()
-    qtd_vendida: number;
 
     @CreateDateColumn()
     data_venda: Date;

@@ -1,7 +1,6 @@
 import 'reflect-metadata'
 import { Produto } from '../entities/Produtos'
 import { ProdutoRepository } from '../repositories/ProdutoRepository'
-import { Estoque } from '../../estoque/entities/Estoque'
 import { EstoqueRepository } from '../../estoque/repositories/EstoqueRepository';
 
 interface IcriandoProduto{
@@ -9,12 +8,13 @@ interface IcriandoProduto{
     nome_produto: string;
     categoria: string;
     preco: number;
+    desconto:string;
     id_estoque:number
 }
 
 export default class CriandoProdutoServece{
 
-    async execute({ nome_produto, categoria, preco, id_estoque}: IcriandoProduto): Promise<Produto>{
+    async execute({ nome_produto, categoria, preco, desconto, id_estoque}: IcriandoProduto): Promise<Produto>{
 
         const estoque = await EstoqueRepository.findOneBy({id: id_estoque})
 
@@ -27,6 +27,7 @@ export default class CriandoProdutoServece{
             nome_produto,
             categoria,
             preco,
+            desconto,
             estoque
         })
 

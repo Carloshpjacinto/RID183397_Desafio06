@@ -5,16 +5,20 @@ export default class VendaController{
 
     public async create(req:Request, res:Response): Promise<Response>{
 
-        const {cod_venda, desconto_produto, valor_venda, qtd_vendida, id_pedido} = req.body;
+        const codVenda = Math.floor(Math.random() * 99999);
+
+        //const desconto_replace = desconto.replace('%', '')
+        
+        //const desconto_numero = Number(desconto_replace)
+
+        const {valor_venda, id_pedido} = req.body;
 
         const criandoVenda = new CriandoVendaServece();
 
         const venda = await criandoVenda.execute({
 
-            cod_venda,
-            desconto_produto,
+            cod_venda: codVenda,
             valor_venda,
-            qtd_vendida,
             id_pedido
         })
 

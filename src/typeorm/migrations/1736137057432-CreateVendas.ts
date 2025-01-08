@@ -19,18 +19,10 @@ export class CreateVendas1736137057432 implements MigrationInterface {
                         type: 'integer',
                     },
                     {
-                        name: 'desconto_produto',
-                        type: 'integer',
-                    },
-                    {
                         name: 'valor_venda',
                         type: 'decimal',
                         precision: 10,
                         scale: 2,
-                    },
-                    {
-                        name: 'qtd_vendida',
-                        type: 'integer',
                     },
                     {
                         name: 'data_venda',
