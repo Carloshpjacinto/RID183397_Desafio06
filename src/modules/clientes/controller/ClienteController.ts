@@ -9,7 +9,17 @@ export default class ClienteController{
 
         const criandoCliente = new CriandoClienteServece();
 
-        const cliente = await criandoCliente.execute({
+        const serializacao = {
+
+            nome_cliente,
+            email,
+            logradouro,
+            endereco,
+            cep,
+            numero_endereco
+        }
+
+        await criandoCliente.execute({
 
             nome_cliente,
             email,
@@ -20,6 +30,6 @@ export default class ClienteController{
             numero_endereco
         })
 
-        return res.status(201).json(cliente)
+        return res.status(201).json(serializacao)
     }
 }

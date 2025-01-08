@@ -14,6 +14,6 @@ export default class EstoqueController{
             qtd_estoque
         })
 
-        return res.status(201).json(estoque)
+        return res.status(201).json({mensagem: `Estoque de id:${estoque.id} criado com sucesso`})
     }
 }
