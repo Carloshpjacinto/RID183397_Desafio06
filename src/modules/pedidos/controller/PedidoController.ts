@@ -45,7 +45,7 @@ export default class PedidoController{
                 email: clienteRepository.email,
                 endereco: {
                     logradouro: clienteRepository.logradouro,
-                    endereco: clienteRepository.endereco,
+                    rua: clienteRepository.endereco,
                     cep: clienteRepository.cep,
                     numeroEndereco: clienteRepository.numero_endereco
                 }

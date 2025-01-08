@@ -40,7 +40,7 @@ export default class VendaController{
         const desconto_replace = desconto.replace('%', '')
         const desconto_numero = Number(desconto_replace)
         
-        const valorFinalVenda = (preco - (preco * (desconto_numero / 100)) * pedido.qtd_produto_pedido)
+        const valorFinalVenda = ((preco - (preco * (desconto_numero / 100))) * pedido.qtd_produto_pedido)
 
         const criandoVenda = new CriandoVendaServece();
 
