@@ -70,19 +70,19 @@ export default class PedidoController{
                 codPedido: codPedido,
     
                 cliente: {
-                    nomeCliente: clienteRepository.nome_cliente,
+                    nome: clienteRepository.nome_cliente,
                     email: clienteRepository.email,
                     endereco: {
                         logradouro: clienteRepository.logradouro,
-                        rua: clienteRepository.endereco,
+                        endereco: clienteRepository.endereco,
                         cep: clienteRepository.cep,
-                        numeroEndereco: clienteRepository.numero_endereco
+                        numero: clienteRepository.numero_endereco
                     }
                 },
     
                 produto: {
                     qtd_produto_pedido,
-                    nomeProduto: produtoRepository.nome_produto,
+                    nome: produtoRepository.nome_produto,
                     categoria: produtoRepository.categoria,
                     preco: produtoRepository.preco,
                     desconto: produtoRepository.desconto

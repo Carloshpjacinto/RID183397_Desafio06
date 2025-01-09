@@ -73,18 +73,18 @@ export default class VendaController{
                 id: venda.id,
                 codVenda: codVenda,
                 produtos: {
-                    nomeProduto: produto.nome_produto,
-                    quantidadeProduto: pedido.qtd_produto_pedido,
-                    precoProdutoUnidade: produto.preco,
-                    descontoProdutos: produto.desconto,
+                    nome: produto.nome_produto,
+                    quantidade: pedido.qtd_produto_pedido,
+                    precoUnitario: produto.preco,
+                    desconto: produto.desconto,
                     precoFinal: valorFinalVenda,
                 },
                 cliente:{
-                    nomeCliente: cliente.nome_cliente,
+                    nome: cliente.nome_cliente,
                     email: cliente.email,
                     endereco: {
                         logradouro: cliente.logradouro,
-                        rua: cliente.endereco,
+                        endereco: cliente.endereco,
                         numero: cliente.numero_endereco,
                         cep: cliente.cep
                     }

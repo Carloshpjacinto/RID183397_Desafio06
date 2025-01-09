@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import CriandoClienteServece from "../services/CriandoClienteServece";
 import { ClienteRepository } from "../repositories/ClienteRepository";
+import { hash } from "bcrypt";
 
 export default class ClienteController{
 
@@ -22,17 +23,21 @@ export default class ClienteController{
     
                 nome_cliente,
                 email,
-                logradouro,
-                endereco,
-                cep,
-                numero_endereco
+                endereco: {
+                    logradouro,
+                    endereco,
+                    cep,
+                    numero: numero_endereco
+                }
             }
+
+            const hashedPassword = await hash(senha, 10)
     
             await criandoCliente.execute({
     
                 nome_cliente,
                 email,
-                senha,
+                senha: hashedPassword,
                 logradouro,
                 endereco,
                 cep,
