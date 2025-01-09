@@ -21,7 +21,7 @@ export default class ClienteController{
     
             const serializacao = {
     
-                nome_cliente,
+                nome: nome_cliente,
                 email,
                 endereco: {
                     logradouro,
