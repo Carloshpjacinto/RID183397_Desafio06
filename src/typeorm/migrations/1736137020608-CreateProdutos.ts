@@ -32,7 +32,8 @@ export class CreateProdutos1736137020608 implements MigrationInterface {
                     {
                         name: 'desconto',
                         type: 'varchar',
-                        default: "0%",
+                        default: '0',
+                        isNullable: true,
                     },
                 ]
             })
