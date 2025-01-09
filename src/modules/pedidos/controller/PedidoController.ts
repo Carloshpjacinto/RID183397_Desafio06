@@ -33,6 +33,19 @@ export default class PedidoController{
                         
                 return res.json({mensagem: "Estoque não encontrado"})
             }
+
+            const qtdEstoque = Number(estoque.qtd_estoque)
+    
+            const qtdPedido = Number(qtd_produto_pedido)
+
+            if(qtdEstoque == 0){
+    
+                return res.json({mensagem: "Esse produto já não está mais disponivel"})
+    
+            }else if(qtdEstoque < qtdPedido){
+    
+                return res.json({mensagem: "Essa quantidade não está disponivel para venda"}) 
+            }
     
             const criandoPedido = new CriandoPedidoServece();
     
@@ -43,19 +56,6 @@ export default class PedidoController{
                 id_cliente,
                 id_produto
             })
-
-            const qtdEstoque = Number(estoque.qtd_estoque)
-    
-            const qtdPedido = Number(pedido.qtd_produto_pedido)
-
-            if(qtdEstoque == 0){
-    
-                return res.json({mensagem: "Esse produto já não está mais disponivel"})
-    
-            }else if(qtdEstoque < qtdPedido){
-    
-                return res.json({mensagem: "Essa quantidade não está disponivel para venda"}) 
-            }
 
             const valorAtualizadoEstoque = qtdEstoque - qtdPedido
     
@@ -70,7 +70,7 @@ export default class PedidoController{
                 codPedido: codPedido,
     
                 cliente: {
-                    nome: clienteRepository.nome_cliente,
+                    nomeCliente: clienteRepository.nome_cliente,
                     email: clienteRepository.email,
                     endereco: {
                         logradouro: clienteRepository.logradouro,
@@ -82,7 +82,7 @@ export default class PedidoController{
     
                 produto: {
                     qtd_produto_pedido,
-                    nome: produtoRepository.nome_produto,
+                    nomeProduto: produtoRepository.nome_produto,
                     categoria: produtoRepository.categoria,
                     preco: produtoRepository.preco,
                     desconto: produtoRepository.desconto

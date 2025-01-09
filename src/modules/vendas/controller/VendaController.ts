@@ -15,7 +15,7 @@ export default class VendaController{
 
             const codVenda = Math.floor(Math.random() * 99999);
     
-            const pedido = await PedidoRepository.findOne({where: {id: id_pedido}, relations: ["produto"],})
+            const pedido = await PedidoRepository.findOne({where: {id: id_pedido}, relations: ["produto", "cliente"],})
 
             const verificacaoPedido = await VendasRepository.findOne({where: {pedido: {id: id_pedido}}, relations: ["pedido"]})
             
@@ -36,7 +36,7 @@ export default class VendaController{
                 return res.json("Produto não encontrado")
             }
     
-            const cliente = await ClienteRepository.findOne({where: {id: pedido.produto.id}})
+            const cliente = await ClienteRepository.findOne({where: {id: pedido.cliente.id}})
     
             if(!cliente){
             
@@ -56,8 +56,17 @@ export default class VendaController{
             
             const desconto_replace = desconto.replace('%', '')
             const desconto_numero = Number(desconto_replace)
-            
-            const valorFinalVenda = ((preco - (preco * (desconto_numero / 100))) * pedido.qtd_produto_pedido)
+
+            let valorFinalVenda = 0
+
+            if(desconto_numero != 0){
+
+                valorFinalVenda = ((preco - (preco * (desconto_numero / 100))) * pedido.qtd_produto_pedido)
+
+            }else{
+
+                valorFinalVenda = (preco * pedido.qtd_produto_pedido)
+            }
     
             const criandoVenda = new CriandoVendaServece();
     
