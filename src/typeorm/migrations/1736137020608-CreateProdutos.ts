@@ -17,6 +17,7 @@ export class CreateProdutos1736137020608 implements MigrationInterface {
                     {
                         name: 'nome_produto',
                         type: 'varchar',
+                        isUnique: true
                     },
                     {
                         name: 'categoria',
@@ -31,6 +32,7 @@ export class CreateProdutos1736137020608 implements MigrationInterface {
                     {
                         name: 'desconto',
                         type: 'varchar',
+                        default: "0%",
                     },
                 ]
             })
