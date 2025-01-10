@@ -5,8 +5,54 @@ import { ProdutoRepository } from "../../produtos/repositories/ProdutoRepository
 import { ClienteRepository } from "../../clientes/repositories/ClienteRepository";
 import { EstoqueRepository } from "../../estoque/repositories/EstoqueRepository";
 import { VendasRepository } from "../repositories/VendasRepository";
+import ListaVendasService from "../services/ListaVendasService";
+import VendaIdService from "../services/VendaIdService";
 
 export default class VendaController{
+
+    public async index(req: Request, res: Response): Promise<Response>{
+                
+        try{
+            const listaVendas = new ListaVendasService()
+                
+            const vendas = await listaVendas.execute();
+                
+            const listaSerializacao = vendas.map((venda) => ({
+                        
+                id: venda.id,
+                cod_venda: venda.cod_venda,
+                valorVenda: venda.valor_venda,
+                data_venda: venda.data_venda
+            }))
+                    
+            return res.json(listaSerializacao)
+                
+        } catch(error){
+                
+            console.error('Erro ao processar a venda:', error);
+            return res.status(500).json({ mensagem: 'Erro interno no servidor'});
+        }
+    }
+
+    public async show(req: Request, res: Response): Promise<Response>{
+                
+        try{
+            const { id } = req.params;
+                
+            const idNumber = Number(id)
+                    
+            const vendaIdService = new VendaIdService()
+                    
+            const venda = await vendaIdService.execute({id: idNumber})
+                    
+            return res.json(venda)
+                
+        } catch(error){
+                
+            console.error('Erro ao processar a venda:', error);
+            return res.status(500).json({ mensagem: 'Erro interno no servidor'});
+        }
+    }
 
     public async create(req:Request, res:Response): Promise<Response>{
 

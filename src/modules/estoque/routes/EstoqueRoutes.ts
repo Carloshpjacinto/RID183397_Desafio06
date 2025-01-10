@@ -6,4 +6,8 @@ const estoqueController = new EstoqueController();
 
 estoqueRoutes.post("/",estoqueController.create);
 
+estoqueRoutes.get("/", estoqueController.index);
+
+estoqueRoutes.get("/:id", estoqueController.show);
+
 export default estoqueRoutes;

@@ -5,7 +5,6 @@ import { EstoqueRepository } from '../repositories/EstoqueRepository'
 interface IcriandoEstoque{
 
     qtd_estoque: number
-
 }
 
 export default class CriandoEstoqueServece{

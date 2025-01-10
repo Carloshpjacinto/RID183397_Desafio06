@@ -6,4 +6,8 @@ const produtoController = new ProdutoController();
 
 produtoRouter.post("/",produtoController.create);
 
+produtoRouter.get("/", produtoController.index);
+
+produtoRouter.get("/:id", produtoController.show);
+
 export default produtoRouter;

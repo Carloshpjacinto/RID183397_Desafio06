@@ -6,9 +6,9 @@ const clienteController = new ClienteController();
 
 clienteRouter.post("/",clienteController.create);
 
-clienteRouter.get("/", clienteController.index)
+clienteRouter.get("/", clienteController.index);
 
-clienteRouter.get("/:id", clienteController.show)
+clienteRouter.get("/:id", clienteController.show);
 
 
 export default clienteRouter;

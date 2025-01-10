@@ -6,4 +6,8 @@ const pedidoController = new PedidoController();
 
 pedidoRoutes.post("/",pedidoController.create);
 
+pedidoRoutes.get("/", pedidoController.index);
+
+pedidoRoutes.get("/:id", pedidoController.show);
+
 export default pedidoRoutes;

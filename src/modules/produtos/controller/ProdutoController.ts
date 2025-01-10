@@ -2,8 +2,55 @@ import { Request, Response } from "express";
 import CriandoProdutoServece from "../services/CriandoProdutoService";
 import { EstoqueRepository } from "../../estoque/repositories/EstoqueRepository";
 import { ProdutoRepository } from "../repositories/ProdutoRepository";
+import ListaProdutosService from "../services/ListaProdutosService"
+import ProdutoIdService from "../services/ProdutoIdService";
 
 export default class ProdutoController{
+
+    public async index(req: Request, res: Response): Promise<Response>{
+            
+        try{
+            const listaProdutos = new ListaProdutosService()
+            
+            const produtos = await listaProdutos.execute();
+            
+            const listaSerializacao = produtos.map((produto) => ({
+                    
+                id: produto.id,
+                nome: produto.nome_produto,
+                categoria: produto.categoria,
+                preco: produto.preco,
+                desconto: produto.desconto,
+            }))
+                
+            return res.json(listaSerializacao)
+            
+        } catch(error){
+            
+            console.error('Erro ao processar a venda:', error);
+            return res.status(500).json({ mensagem: 'Erro interno no servidor'});
+        }
+    }
+
+    public async show(req: Request, res: Response): Promise<Response>{
+            
+        try{
+            const { id } = req.params;
+            
+            const idNumber = Number(id)
+                
+            const produtoIdService = new ProdutoIdService()
+                
+            const produto = await produtoIdService.execute({id: idNumber})
+                
+            return res.json(produto)
+            
+        } catch(error){
+            
+            console.error('Erro ao processar a venda:', error);
+            return res.status(500).json({ mensagem: 'Erro interno no servidor'});
+        }
+    }
 
     public async create(req:Request, res:Response): Promise<Response>{
 

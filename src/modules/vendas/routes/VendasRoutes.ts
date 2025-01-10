@@ -6,4 +6,8 @@ const vendaController = new VendasController();
 
 vendaRouter.post("/",vendaController.create);
 
+vendaRouter.get("/", vendaController.index);
+
+vendaRouter.get("/:id", vendaController.show);
+
 export default vendaRouter;

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ListaClienteService from "../services/ListaClienteServece";
+import ListaClienteService from "../services/ListaClienteService";
 import CriandoClienteService from "../services/CriandoClienteService";
 import { ClienteRepository } from "../repositories/ClienteRepository";
 import { hash } from "bcrypt";

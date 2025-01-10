@@ -3,8 +3,55 @@ import CriandoPedidoServece from "../services/CriandoPedidoServece";
 import { ClienteRepository } from "../../clientes/repositories/ClienteRepository";
 import { ProdutoRepository } from "../../produtos/repositories/ProdutoRepository";
 import { EstoqueRepository } from "../../estoque/repositories/EstoqueRepository";
+import ListaPedidosService from "../services/ListaPedidosService";
+import PedidoIdService from "../services/PedidoIdService";
 
 export default class PedidoController{
+
+    public async index(req: Request, res: Response): Promise<Response>{
+        
+        try{
+            const listaPedidos = new ListaPedidosService()
+        
+            const pedido = await listaPedidos.execute();
+        
+            const listaSerializacao = pedido.map((pedido) => ({
+                
+                id: pedido.id,
+                cod_pedido: pedido.cod_pedido,
+                data: pedido.data_pedido,
+                se: pedido.qtd_produto_pedido
+            }))
+            
+            return res.json(listaSerializacao)
+        
+        } catch(error){
+        
+            console.error('Erro ao processar a venda:', error);
+            return res.status(500).json({ mensagem: 'Erro interno no servidor'});
+        }
+        
+    }
+
+    public async show(req: Request, res: Response): Promise<Response>{
+        
+        try{
+            const { id } = req.params;
+        
+            const idNumber = Number(id)
+            
+            const pedidoIdService = new PedidoIdService()
+            
+            const pedido = await pedidoIdService.execute({id: idNumber})
+            
+            return res.json(pedido)
+        
+        } catch(error){
+        
+            console.error('Erro ao processar a venda:', error);
+            return res.status(500).json({ mensagem: 'Erro interno no servidor'});
+        }
+    }
 
     public async create(req:Request, res:Response): Promise<Response>{
 
