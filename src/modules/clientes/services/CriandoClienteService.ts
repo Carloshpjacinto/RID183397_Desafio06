@@ -13,7 +13,7 @@ interface IcriandoCliente{
     numero_endereco: number
 }
 
-export default class CriandoClienteServece{
+export default class CriandoClienteService{
 
     async execute({ nome_cliente, email, senha, logradouro, endereco, cep, numero_endereco}: IcriandoCliente): Promise<Cliente>{
 
