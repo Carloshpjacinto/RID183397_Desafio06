@@ -1,13 +1,32 @@
 import 'reflect-metadata'
+import { ISerializacao } from '../models/ISerializacao'
 import { Cliente } from '../entities/Clientes'
 import { ClienteRepository } from '../repositories/ClienteRepository'
 
 export default class ListaClienteService{
 
-    public async execute(): Promise<Cliente[]>{
+    public async execute(): Promise<ISerializacao[] | Cliente | string>{
 
-        const cliente = ClienteRepository.find();
+        const clientes = await ClienteRepository.find();
 
-        return cliente
+        if(!clientes){
+
+            return ("Clientes não encontrados")
+        }
+
+        const listaSerializacao = clientes.map((cliente) => ({
+
+            id: cliente.id,
+            nome: cliente.nome_cliente,
+            email: cliente.email,
+            endereco: {
+                logradouro: cliente.logradouro,
+                endereco: cliente.endereco,
+                cep: cliente.cep,
+                numero: cliente.numero_endereco
+            }
+        }))
+
+        return listaSerializacao
     }
 }

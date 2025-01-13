@@ -13,21 +13,8 @@ export default class ClienteController{
             const listaCliente = new ListaClienteService()
 
             const clientes = await listaCliente.execute();
-
-            const listaSerializacao = clientes.map((cliente) => ({
-
-                nome: cliente.nome_cliente,
-                email: cliente.email,
-                endereco: {
-                    logradouro: cliente.logradouro,
-                    endereco: cliente.endereco,
-                    cep: cliente.cep,
-                    numero: cliente.numero_endereco
-                }
-            }
-        ))
     
-            return res.json(listaSerializacao)
+            return res.json(clientes)
 
         } catch(error){
 
