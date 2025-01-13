@@ -19,7 +19,7 @@ export default class ClienteIdService{
             return ('Cliente não encontrado');
         }
 
-        const serializacao = {
+        const serializacao:ISerializacao = {
     
             id: cliente.id,
             nome: cliente.nome_cliente,

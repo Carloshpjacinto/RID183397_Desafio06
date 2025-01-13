@@ -16,18 +16,6 @@ export default class CriandoClienteService{
             return ("O email já está cadastrado")
         }
 
-        const serializacao:ISerializacao = {
-    
-            nome: nome_cliente,
-            email: email,
-            endereco: {
-                logradouro: logradouro,
-                endereco: endereco,
-                cep: cep,
-                numero: numero_endereco
-            }
-        }
-
         const hashedPassword = await hash(senha, 10)
 
         const cliente:Cliente = ClienteRepository.create({
@@ -40,6 +28,19 @@ export default class CriandoClienteService{
             cep,
             numero_endereco
         })
+
+        const serializacao:ISerializacao = {
+    
+            id: cliente.id,
+            nome: nome_cliente,
+            email: email,
+            endereco: {
+                logradouro: logradouro,
+                endereco: endereco,
+                cep: cep,
+                numero: numero_endereco
+            }
+        }
 
         await ClienteRepository.save(cliente)
 

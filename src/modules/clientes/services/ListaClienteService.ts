@@ -14,7 +14,7 @@ export default class ListaClienteService{
             return ("Clientes não encontrados")
         }
 
-        const listaSerializacao = clientes.map((cliente) => ({
+        const listaSerializacao:ISerializacao[] = clientes.map((cliente) => ({
 
             id: cliente.id,
             nome: cliente.nome_cliente,
