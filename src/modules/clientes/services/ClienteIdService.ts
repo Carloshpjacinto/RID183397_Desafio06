@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import { ISerializacao } from '../models/ISerializacao'
 import { Cliente } from '../entities/Clientes'
 import { ClienteRepository } from '../repositories/ClienteRepository'
 
@@ -9,15 +10,28 @@ interface IRequest{
 
 export default class ClienteIdService{
 
-    public async execute({id}: IRequest): Promise<Cliente | Error>{
+    public async execute({id}: IRequest): Promise<Cliente | ISerializacao | string>{
 
         const cliente = await ClienteRepository.findById(id);
 
         if(!cliente){
 
-            return new Error('Cliente não encontrado');
+            return ('Cliente não encontrado');
         }
 
-        return cliente
+        const serializacao = {
+    
+            id: cliente.id,
+            nome: cliente.nome_cliente,
+            email: cliente.email,
+            endereco: {
+                logradouro: cliente.logradouro,
+                endereco: cliente.endereco,
+                cep: cliente.cep,
+                numero: cliente.numero_endereco
+            }
+        }
+
+        return serializacao
     }
 }

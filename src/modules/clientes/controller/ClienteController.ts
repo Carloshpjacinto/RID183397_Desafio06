@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import ListaClienteService from "../services/ListaClienteService";
 import CriandoClienteService from "../services/CriandoClienteService";
-import { ClienteRepository } from "../repositories/ClienteRepository";
-import { hash } from "bcrypt";
 import ClienteIdService from "../services/ClienteIdService";
 
 export default class ClienteController{
@@ -30,31 +28,12 @@ export default class ClienteController{
             const { id } = req.params;
 
             const idNumber = Number(id)
-
-            const clienteRepository = await ClienteRepository.findOne({where: {id: idNumber}})
-
-            if(!clienteRepository){
-
-                return res.json({mensagem: "O cliente não foi encontrado"})
-            }
-
-            const serializacao = {
-    
-                nome: clienteRepository.nome_cliente,
-                email: clienteRepository.email,
-                endereco: {
-                    logradouro: clienteRepository.logradouro,
-                    endereco: clienteRepository.endereco,
-                    cep: clienteRepository.cep,
-                    numero: clienteRepository.numero_endereco
-                }
-            }
     
             const clienteIdService = new ClienteIdService()
     
-            await clienteIdService.execute({id: idNumber})
+            const cliente = await clienteIdService.execute({id: idNumber})
     
-            return res.json(serializacao)
+            return res.json(cliente)
 
         } catch(error){
 
