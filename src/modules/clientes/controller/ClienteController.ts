@@ -81,41 +81,20 @@ export default class ClienteController{
         try{
             const {nome_cliente, email, senha, logradouro, endereco, cep, numero_endereco} = req.body;
 
-            const clienteRepository = await ClienteRepository.findOne({where: {email: email}})
-
-            if(clienteRepository){
-
-                return res.json({mensagem: "O email já está cadastrado"})
-            }
-
             const criandoCliente = new CriandoClienteService();
     
-            const serializacao = {
-    
-                nome: nome_cliente,
-                email,
-                endereco: {
-                    logradouro,
-                    endereco,
-                    cep,
-                    numero: numero_endereco
-                }
-            }
-
-            const hashedPassword = await hash(senha, 10)
-    
-            await criandoCliente.execute({
+            const cliente = await criandoCliente.execute({
     
                 nome_cliente,
                 email,
-                senha: hashedPassword,
+                senha,
                 logradouro,
                 endereco,
                 cep,
                 numero_endereco
             })
     
-            return res.status(201).json(serializacao)
+            return res.status(201).json(cliente)
 
         } catch(error){
 
