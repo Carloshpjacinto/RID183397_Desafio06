@@ -1,21 +1,17 @@
 import 'reflect-metadata'
+import { IId } from '../models/IId';
 import { Estoque } from '../entities/Estoque'
 import { EstoqueRepository } from '../repositories/EstoqueRepository'
 
-interface IRequest{
-
-    id: number
-}
-
 export default class EstoqueIdService{
 
-    public async execute({id}: IRequest): Promise<Estoque | Error>{
+    public async execute({id}: IId): Promise<Estoque | string>{
 
         const estoque = await EstoqueRepository.findById(id);
 
         if(!estoque){
 
-            return new Error('Cliente não encontrado');
+            return ('Estoque não encontrado');
         }
 
         return estoque

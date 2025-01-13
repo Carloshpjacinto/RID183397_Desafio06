@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import CriandoProdutoServece from "../services/CriandoProdutoService";
-import { EstoqueRepository } from "../../estoque/repositories/EstoqueRepository";
-import { ProdutoRepository } from "../repositories/ProdutoRepository";
 import ListaProdutosService from "../services/ListaProdutosService"
 import ProdutoIdService from "../services/ProdutoIdService";
 
@@ -13,17 +11,8 @@ export default class ProdutoController{
             const listaProdutos = new ListaProdutosService()
             
             const produtos = await listaProdutos.execute();
-            
-            const listaSerializacao = produtos.map((produto) => ({
-                    
-                id: produto.id,
-                nome: produto.nome_produto,
-                categoria: produto.categoria,
-                preco: produto.preco,
-                desconto: produto.desconto,
-            }))
                 
-            return res.json(listaSerializacao)
+            return res.json({produtos})
             
         } catch(error){
             
@@ -43,7 +32,7 @@ export default class ProdutoController{
                 
             const produto = await produtoIdService.execute({id: idNumber})
                 
-            return res.json(produto)
+            return res.json({produto})
             
         } catch(error){
             
@@ -57,27 +46,6 @@ export default class ProdutoController{
         try{
             const {nome_produto, categoria, preco, desconto, id_estoque} = req.body;
 
-            const estoque = await EstoqueRepository.findOne({where: {id: id_estoque}})
-
-            const produtoVerificacao = await ProdutoRepository.findOne({where: {estoque: {id: id_estoque}}, relations: ["estoque"] })
-
-            const produtoVerificaNome = await ProdutoRepository.findOne({where: {nome_produto: nome_produto}})
-
-            if(produtoVerificacao){
-
-                return res.json({mensagem: "Já existe um produto com esse id estoque associado"})
-            }
-
-            if(produtoVerificaNome){
-
-                return res.json({mensagem: "Já existe um produto com esse nome cadastrado"})
-            }
-                
-            if(!estoque){
-                        
-                return res.json({mensagem: "Estoque não encontrado"})
-            }
-    
             const criandoProduto = new CriandoProdutoServece();
     
             const produto = await criandoProduto.execute({
@@ -89,7 +57,7 @@ export default class ProdutoController{
                 id_estoque
             })
     
-            return res.status(201).json(produto)
+            return res.status(201).json({produto})
 
         } catch(error){
 

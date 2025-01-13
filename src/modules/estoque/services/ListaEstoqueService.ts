@@ -1,13 +1,20 @@
 import 'reflect-metadata'
+import { IEstoque } from '../models/IEstoques';
 import { Estoque } from '../entities/Estoque'
 import { EstoqueRepository } from '../repositories/EstoqueRepository'
 
 export default class ListaClienteService{
 
-    public async execute(): Promise<Estoque[]>{
+    public async execute(): Promise<IEstoque[] | Estoque>{
 
-        const estoque = EstoqueRepository.find();
+        const estoques = await EstoqueRepository.find();
 
-        return estoque
+        const listaEstoque:IEstoque[] = estoques.map((estoque) => ({
+
+            id: estoque.id,
+            quantidade: estoque.qtd_estoque
+        }))
+
+        return listaEstoque
     }
 }

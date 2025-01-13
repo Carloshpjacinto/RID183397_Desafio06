@@ -1,21 +1,17 @@
 import 'reflect-metadata'
+import { IId } from '../models/IId';
 import { Pedido } from '../entities/Pedidos'
 import { PedidoRepository } from '../repositories/PedidoRepository'
 
-interface IRequest{
-
-    id: number
-}
-
 export default class PedidoIdService{
 
-    public async execute({id}: IRequest): Promise<Pedido | Error>{
+    public async execute({id}: IId): Promise<Pedido | string>{
 
         const pedido = await PedidoRepository.findById(id);
 
         if(!pedido){
 
-            return new Error('Cliente não encontrado');
+            return ('Pedido não encontrado');
         }
 
         return pedido

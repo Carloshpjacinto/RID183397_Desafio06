@@ -1,23 +1,19 @@
 import 'reflect-metadata'
+import { IcriandoEstoque } from '../models/ICriandoEstoque'
 import { Estoque } from '../entities/Estoque'
 import { EstoqueRepository } from '../repositories/EstoqueRepository'
 
-interface IcriandoEstoque{
-
-    qtd_estoque: number
-}
-
 export default class CriandoEstoqueServece{
 
-    async execute({ qtd_estoque }: IcriandoEstoque): Promise<Estoque>{
+    async execute({ qtd_estoque }: IcriandoEstoque): Promise<Estoque | string>{
 
         const estoque = EstoqueRepository.create({
 
             qtd_estoque
         })
 
-        await EstoqueRepository.save(estoque)
+        const est = await EstoqueRepository.save(estoque)
 
-        return estoque
+        return `Estoque de id: ${est.id} criado com sucesso`
     }
 }

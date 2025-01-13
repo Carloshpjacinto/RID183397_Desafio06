@@ -29,9 +29,11 @@ export default class CriandoClienteService{
             numero_endereco
         })
 
+        const cli:Cliente = await ClienteRepository.save(cliente)
+
         const serializacao:ISerializacao = {
     
-            id: cliente.id,
+            id: cli.id,
             nome: nome_cliente,
             email: email,
             endereco: {
@@ -41,8 +43,6 @@ export default class CriandoClienteService{
                 numero: numero_endereco
             }
         }
-
-        await ClienteRepository.save(cliente)
 
         return serializacao
     }

@@ -12,13 +12,7 @@ export default class EstoqueController{
     
                 const estoque = await listaEstoque.execute();
     
-                const listaSerializacao = estoque.map((estoque) => ({
-    
-                    id: estoque.id,
-                    estoque: estoque.qtd_estoque
-                }))
-        
-                return res.json(listaSerializacao)
+                return res.json({Estoque: estoque})
     
             } catch(error){
     
@@ -39,7 +33,7 @@ export default class EstoqueController{
         
                 const estoque = await estoqueIdService.execute({id: idNumber})
         
-                return res.json(estoque)
+                return res.json({Estoque: estoque})
     
             } catch(error){
     
@@ -50,15 +44,23 @@ export default class EstoqueController{
 
     public async create(req:Request, res:Response): Promise<Response>{
 
-        const {qtd_estoque} = req.body;
+        try{
 
-        const criandoEstoue = new CriandoEstoqueService();
+            const {qtd_estoque} = req.body;
 
-        const estoque = await criandoEstoue.execute({
+            const criandoEstoque = new CriandoEstoqueService();
+    
+            const estoque = await criandoEstoque.execute({
+    
+                qtd_estoque
+            })
+    
+            return res.status(201).json({mensagem: estoque})
 
-            qtd_estoque
-        })
+        } catch(error){
 
-        return res.status(201).json({mensagem: `Estoque de id: ${estoque.id} criado com sucesso`})
+            console.error('Erro ao processar a venda:', error);
+            return res.status(500).json({ mensagem: 'Erro interno no servidor'});
+        }
     }
 }

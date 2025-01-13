@@ -12,7 +12,7 @@ export default class ClienteController{
 
             const clientes = await listaCliente.execute();
     
-            return res.json(clientes)
+            return res.json({clientes})
 
         } catch(error){
 
@@ -33,7 +33,7 @@ export default class ClienteController{
     
             const cliente = await clienteIdService.execute({id: idNumber})
     
-            return res.json(cliente)
+            return res.json({cliente})
 
         } catch(error){
 
@@ -60,7 +60,7 @@ export default class ClienteController{
                 numero_endereco
             })
     
-            return res.status(201).json(cliente)
+            return res.status(201).json({cliente})
 
         } catch(error){
 
