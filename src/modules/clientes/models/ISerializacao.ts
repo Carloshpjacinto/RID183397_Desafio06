@@ -6,4 +6,4 @@ export interface ISerializacao{
     nome: string;
     email: string;
     endereco: IEndereco;
-}
+};

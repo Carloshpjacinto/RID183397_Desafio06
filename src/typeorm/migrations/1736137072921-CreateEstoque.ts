@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateEstoque1736137072921 implements MigrationInterface {
 
@@ -21,9 +21,9 @@ export class CreateEstoque1736137072921 implements MigrationInterface {
                 ]
             })
         );
-    }
+    };
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable('estoque');
-    }
-}
+    };
+};

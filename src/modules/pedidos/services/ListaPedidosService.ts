@@ -1,20 +1,20 @@
-import 'reflect-metadata'
-import { Pedido } from '../entities/Pedidos'
-import { PedidoRepository } from '../repositories/PedidoRepository'
-import { IListaPedidos } from '../models/IListaPedidos';
+import 'reflect-metadata';
+import { Pedido } from "../entities/Pedidos";
+import { IserializacaoPedido } from "../models/ISerializacaoPedido";
+import { PedidoRepository } from "../repositories/PedidoRepository";
 
 export default class ListaPedidosService{
 
-    public async execute(): Promise<Pedido | IListaPedidos[] | string>{
+    public async execute(): Promise<Pedido | IserializacaoPedido[] | string>{
 
         const pedidos = await PedidoRepository.find({relations: ["cliente", "produto"]});
 
         if(!pedidos){
 
-            return ("Pedidos não encontrados")
+            return ("Pedidos não encontrados");
         }
 
-        const listaSerializacao:IListaPedidos[] = pedidos.map((pedido) => ({
+        const listaSerializacao:IserializacaoPedido[] = pedidos.map((pedido) => ({
 
             id: pedido.id,
             cod_pedido: pedido.cod_pedido,
@@ -30,6 +30,7 @@ export default class ListaPedidosService{
                 }
             },
             produto:{
+                id: pedido.produto.id,
                 quantidade: pedido.qtd_produto_pedido,
                 nome: pedido.produto.nome_produto,
                 categoria: pedido.produto.categoria,
@@ -38,6 +39,6 @@ export default class ListaPedidosService{
             }
         }))
 
-        return listaSerializacao
-    }
-}
+        return listaSerializacao;
+    };
+};

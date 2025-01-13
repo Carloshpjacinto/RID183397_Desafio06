@@ -6,5 +6,5 @@ export interface IcriandoCliente{
     logradouro: string;
     endereco: string;
     cep: string;
-    numero_endereco: number
-}
+    numero_endereco: number;
+};

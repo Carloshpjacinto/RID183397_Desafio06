@@ -1,7 +1,7 @@
-import 'reflect-metadata'
-import { IId } from '../models/IId';
-import { Estoque } from '../entities/Estoque'
-import { EstoqueRepository } from '../repositories/EstoqueRepository'
+import 'reflect-metadata';
+import { IId } from "../models/IId";
+import { Estoque } from "../entities/Estoque";
+import { EstoqueRepository } from "../repositories/EstoqueRepository";
 
 export default class EstoqueIdService{
 
@@ -14,6 +14,6 @@ export default class EstoqueIdService{
             return ('Estoque não encontrado');
         }
 
-        return estoque
-    }
-}
+        return estoque;
+    };
+};

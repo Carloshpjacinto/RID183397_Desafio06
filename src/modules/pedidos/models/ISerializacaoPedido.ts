@@ -4,7 +4,7 @@ import { IProduto } from "./IProduto";
 export interface IserializacaoPedido {
 
     id: number;
-    codPedido: number;
+    cod_pedido: number;
     cliente: ISerializacao;
-    produto: IProduto
-}
+    produto: IProduto;
+};

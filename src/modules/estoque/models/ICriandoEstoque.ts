@@ -1,4 +1,4 @@
 export interface IcriandoEstoque{
 
-    qtd_estoque: number
-}
+    qtd_estoque: number;
+};

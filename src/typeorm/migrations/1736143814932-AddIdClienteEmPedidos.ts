@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from "typeorm";
+import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from 'typeorm';
 
 export class AddIdClienteEmPedidos1736143814932 implements MigrationInterface {
 
@@ -22,10 +22,10 @@ export class AddIdClienteEmPedidos1736143814932 implements MigrationInterface {
                 onDelete: 'SET NULL'
             })
         )
-    }
+    };
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('pedidos', 'PedidosClientes');
         await queryRunner.dropColumn('pedidos', 'id_cliente')
-    }
-}
+    };
+};

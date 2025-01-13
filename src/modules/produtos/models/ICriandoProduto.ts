@@ -4,5 +4,5 @@ export interface IcriandoProduto{
     categoria: string;
     preco: number;
     desconto:string;
-    id_estoque:number
-}
+    id_estoque:number;
+};

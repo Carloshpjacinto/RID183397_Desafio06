@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('estoque')
 export class Estoque{
@@ -8,4 +8,4 @@ export class Estoque{
 
     @Column()
     qtd_estoque: number;
-}
+};

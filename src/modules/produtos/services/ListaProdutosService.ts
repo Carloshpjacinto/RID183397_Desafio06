@@ -1,17 +1,17 @@
-import 'reflect-metadata'
-import { IListaProdutos } from '../models/IListaProdutos';
-import { Produto } from '../entities/Produtos'
-import { ProdutoRepository } from '../repositories/ProdutoRepository'
+import 'reflect-metadata';
+import { IListaProdutos } from "../models/IListaProdutos";
+import { Produto } from "../entities/Produtos";
+import { ProdutoRepository } from "../repositories/ProdutoRepository";
 
 export default class ListaProdutosService{
 
     public async execute(): Promise<IListaProdutos[] | Produto | string>{
 
-        const produtos = await ProdutoRepository.find();
+        const produtos = await ProdutoRepository.find({relations: ["estoque"]});
 
         if(!produtos){
 
-            return ("Produtos não encontrados")
+            return ("Produtos não encontrados");
         }
 
         const listaSerializacao:IListaProdutos[] = produtos.map((produto) => ({
@@ -20,9 +20,10 @@ export default class ListaProdutosService{
             nome: produto.nome_produto,
             categoria: produto.categoria,
             preco: produto.preco,
-            desconto: produto.desconto
+            desconto: produto.desconto,
+            estoque: produto.estoque
         }))
 
-        return listaSerializacao
-    }
-}
+        return listaSerializacao;
+    };
+};

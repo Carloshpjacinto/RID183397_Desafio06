@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Pedido } from "../../pedidos/entities/Pedidos";
 
 @Entity('vendas')
@@ -22,4 +22,4 @@ export class Venda{
 
     @UpdateDateColumn()
     data_venda_update: Date;
-}
+};

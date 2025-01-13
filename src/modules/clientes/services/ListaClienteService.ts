@@ -1,7 +1,7 @@
-import 'reflect-metadata'
-import { ISerializacao } from '../models/ISerializacao'
-import { Cliente } from '../entities/Clientes'
-import { ClienteRepository } from '../repositories/ClienteRepository'
+import 'reflect-metadata';
+import { ISerializacao } from "../models/ISerializacao";
+import { Cliente } from "../entities/Clientes";
+import { ClienteRepository } from "../repositories/ClienteRepository";
 
 export default class ListaClienteService{
 
@@ -11,7 +11,7 @@ export default class ListaClienteService{
 
         if(!clientes){
 
-            return ("Clientes não encontrados")
+            return ("Clientes não encontrados");
         }
 
         const listaSerializacao:ISerializacao[] = clientes.map((cliente) => ({
@@ -25,8 +25,8 @@ export default class ListaClienteService{
                 cep: cliente.cep,
                 numero: cliente.numero_endereco
             }
-        }))
+        }));
 
-        return listaSerializacao
-    }
-}
+        return listaSerializacao;
+    };
+};

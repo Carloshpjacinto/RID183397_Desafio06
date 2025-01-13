@@ -1,5 +1,5 @@
-export interface IEstoque{
+export interface IListaEstoque{
 
     id: number;
     quantidade: number;
-}
+};

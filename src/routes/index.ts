@@ -7,10 +7,10 @@ import { Router } from 'express';
 
 const routes = Router();
 
-routes.use('/cliente', clienteRouter);
+routes.use('/clientes', clienteRouter);
 routes.use('/estoque', estoqueRoutes);
-routes.use('/pedido', pedidoRoutes);
-routes.use('/produto', produtoRouter);
-routes.use('/venda', vendaRouter);
+routes.use('/pedidos', pedidoRoutes);
+routes.use('/produtos', produtoRouter);
+routes.use('/vendas', vendaRouter);
 
 export default routes;

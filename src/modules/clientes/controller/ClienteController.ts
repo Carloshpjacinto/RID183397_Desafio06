@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 import ListaClienteService from "../services/ListaClienteService";
 import CriandoClienteService from "../services/CriandoClienteService";
 import ClienteIdService from "../services/ClienteIdService";
@@ -8,11 +8,11 @@ export default class ClienteController{
     public async index(req: Request, res: Response): Promise<Response>{
 
         try{
-            const listaCliente = new ListaClienteService()
+            const listaCliente = new ListaClienteService();
 
             const clientes = await listaCliente.execute();
     
-            return res.json({clientes})
+            return res.json({Clientes: clientes});
 
         } catch(error){
 
@@ -27,13 +27,13 @@ export default class ClienteController{
         try{
             const { id } = req.params;
 
-            const idNumber = Number(id)
+            const idNumber = Number(id);
     
-            const clienteIdService = new ClienteIdService()
+            const clienteIdService = new ClienteIdService();
     
-            const cliente = await clienteIdService.execute({id: idNumber})
+            const cliente = await clienteIdService.execute({id: idNumber});
     
-            return res.json({cliente})
+            return res.json({Cliente: cliente});
 
         } catch(error){
 
@@ -60,12 +60,12 @@ export default class ClienteController{
                 numero_endereco
             })
     
-            return res.status(201).json({cliente})
+            return res.status(201).json({Cliente: cliente});
 
         } catch(error){
 
             console.error('Erro ao processar a venda:', error);
             return res.status(500).json({ mensagem: 'Erro interno no servidor'});
-        }
-    }
-}
+        };
+    };
+};

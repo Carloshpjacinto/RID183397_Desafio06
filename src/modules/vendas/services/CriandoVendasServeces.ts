@@ -1,60 +1,93 @@
-import 'reflect-metadata'
-import { Venda } from '../entities/Vendas'
-import { VendasRepository } from '../repositories/VendasRepository'
-import { PedidoRepository } from '../../pedidos/repositories/PedidoRepository';
-import { ProdutoRepository } from '../../produtos/repositories/ProdutoRepository';
-import { ClienteRepository } from '../../clientes/repositories/ClienteRepository';
-import { EstoqueRepository } from '../../estoque/repositories/EstoqueRepository';
-import { ICriandoVenda } from '../models/ICriandoVenda';
+import 'reflect-metadata';
+import { Venda } from "../entities/Vendas";
+import { VendasRepository } from "../repositories/VendasRepository";
+import { PedidoRepository } from "../../pedidos/repositories/PedidoRepository";
+import { ICriandoVenda } from "../models/ICriandoVenda";
+import { ISerializacaoVenda } from '../models/ISerializacaoVenda';
 
 export default class CriandoVendaServece{
 
-    async execute({ cod_venda, valor_venda, id_pedido}: ICriandoVenda): Promise<Venda | string>{
+    async execute({ id_pedido }: ICriandoVenda): Promise<Venda | ISerializacaoVenda | string>{
 
-        const pedido = await PedidoRepository.findOne({where: {id: id_pedido}, relations: ["produto", "cliente"],})
-        
-        const verificacaoPedido = await VendasRepository.findOne({where: {pedido: {id: id_pedido}}, relations: ["pedido"]})
-                    
+        const codVenda = Math.floor(Math.random() * 99999);
+
+        const pedido = await PedidoRepository.findOne({where: {id: id_pedido}, relations: ["produto", "cliente"],});
+
         if(!pedido){
-                    
-            return ('O pedido não foi encontrado')
+                
+            return ('O pedido não foi encontrado');
         }
-        
+
+        const verificacaoPedido = await VendasRepository.findOne({where: {pedido: {id: id_pedido}}, relations: ["pedido"]});
+                
         if(verificacaoPedido){
+                
+            return ('O pedido informado já foi processado para venda');
+        }
+
+        const preco = pedido.produto.preco
         
-            return ('O pedido informado já foi processado para venda')
-        }
-            
-        const produto = await ProdutoRepository.findOne({where: {id: pedido.produto.id}, relations: ["estoque"]})
-            
-        if(!produto){
-                    
-            return ("Produto não encontrado")
-        }
-            
-        const cliente = await ClienteRepository.findOne({where: {id: pedido.cliente.id}})
-            
-        if(!cliente){
-                    
-            return ("Cliente não encontrado")
-        }
-            
-        const estoque = await EstoqueRepository.findOne({where: {id: produto.estoque.id}})
-            
-        if(!estoque){
-                    
-            return ("Estoque não encontrado")
-        }
+        const desconto = pedido.produto.desconto
+        
+        const desconto_replace = desconto.replace('%', '')
+        const desconto_numero = Number(desconto_replace)
+
+        let valorFinalVenda = 0
+
+        if(desconto_numero != 0){
+
+            valorFinalVenda = ((preco - (preco * (desconto_numero / 100))) * pedido.qtd_produto_pedido)
+
+        }else{
+
+            valorFinalVenda = (preco * pedido.qtd_produto_pedido)
+        } 
 
         const venda = VendasRepository.create({
 
-            cod_venda,
-            valor_venda,
+            cod_venda: codVenda,
+            valor_venda: valorFinalVenda,
             pedido
         })
 
-        await VendasRepository.save(venda)
+        await VendasRepository.save(venda);
 
-        return venda
+        const serializacaoVenda:ISerializacaoVenda = {
+
+            id: venda.id,
+            cod_venda: venda.cod_venda,
+
+            pedido: {
+                id: pedido.id,
+                cod_pedido: pedido.cod_pedido,
+
+                cliente: {
+                        id: pedido.cliente.id,
+                        nome: pedido.cliente.nome_cliente,
+                        email: pedido.cliente.email,
+                        endereco: {
+                            logradouro: pedido.cliente.logradouro,
+                            endereco: pedido.cliente.endereco,
+                            cep: pedido.cliente.cep,
+                            numero: pedido.cliente.numero_endereco,
+                        }
+                },
+
+                produto: {
+                    id: pedido.produto.id,
+                    quantidade: pedido.qtd_produto_pedido,
+                    nome: pedido.produto.nome_produto,
+                    categoria: pedido.produto.categoria,
+                    preco: pedido.produto.preco,
+                    desconto: pedido.produto.desconto,
+                }
+            },
+
+            valor_venda: venda.valor_venda,
+            data_venda: venda.data_venda
+
+        }
+
+        return serializacaoVenda;
     }
 }

@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreatePedidos1736137028394 implements MigrationInterface {
 
@@ -35,9 +35,9 @@ export class CreatePedidos1736137028394 implements MigrationInterface {
                 ]
             })
         );
-    }
+    };
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable('pedidos');
-    }
-}
+    };
+};

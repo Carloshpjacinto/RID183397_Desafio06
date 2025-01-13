@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('clientes')
 export class Cliente{
@@ -26,4 +26,4 @@ export class Cliente{
 
     @Column()
     cep: string;
-}
+};

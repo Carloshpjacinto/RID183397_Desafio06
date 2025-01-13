@@ -5,4 +5,4 @@ export interface IListaProdutos{
     categoria: string;
     preco: number;
     desconto: string;
-}
+};
