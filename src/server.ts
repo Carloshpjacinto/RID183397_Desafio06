@@ -2,12 +2,16 @@ import express, {Express} from 'express';
 import { AppDataSource } from "./typeorm/data-source";
 import routes from './routes';
 import cors from 'cors'
+import { errors } from 'celebrate';
+import ErrorHandlerMiddleware from './shared/errors/ErrorHandlerMiddleware';
 
 const app:Express = express();
 
 app.use(express.json());
 app.use(cors());
 app.use(routes);
+app.use(errors())
+app.use(ErrorHandlerMiddleware.handleError)
 
 const port:number = Number(process.env.PORT);
 
