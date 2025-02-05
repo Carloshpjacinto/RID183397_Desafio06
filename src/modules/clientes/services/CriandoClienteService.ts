@@ -7,7 +7,7 @@ import { hash } from 'bcrypt';
 
 export default class CriandoClienteService{
 
-    async execute({ nome_cliente, email, senha, logradouro, endereco, cep, numero_endereco}: IcriandoCliente): Promise<Cliente | ISerializacao | string>{
+    async execute({ nome_cliente, role, email, senha, logradouro, endereco, cep, numero_endereco}: IcriandoCliente): Promise<Cliente | ISerializacao | string>{
 
         const clienteRepository = await ClienteRepository.findOne({where: {email: email}});
 
@@ -21,6 +21,7 @@ export default class CriandoClienteService{
         const cliente:Cliente = ClienteRepository.create({
 
             nome_cliente,
+            role,
             email,
             senha: hashedPassword,
             logradouro,
@@ -35,6 +36,7 @@ export default class CriandoClienteService{
     
             id: cli.id,
             nome: nome_cliente,
+            role: role,
             email: email,
             endereco: {
                 logradouro: logradouro,

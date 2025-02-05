@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { Role } from '../../modules/clientes/utils/EnumRole';
 
 export class CreateClientes1736136707597 implements MigrationInterface {
 
@@ -16,6 +17,10 @@ export class CreateClientes1736136707597 implements MigrationInterface {
                     },
                     {
                         name: 'nome_cliente',
+                        type: 'varchar',
+                    },
+                    {
+                        name: 'role',
                         type: 'varchar',
                     },
                     {

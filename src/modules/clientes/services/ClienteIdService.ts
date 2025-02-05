@@ -19,6 +19,7 @@ export default class ClienteIdService{
     
             id: cliente.id,
             nome: cliente.nome_cliente,
+            role: cliente.role,
             email: cliente.email,
             endereco: {
                 logradouro: cliente.logradouro,

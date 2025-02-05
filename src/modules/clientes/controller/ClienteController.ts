@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import ListaClienteService from "../services/ListaClienteService";
 import CriandoClienteService from "../services/CriandoClienteService";
 import ClienteIdService from "../services/ClienteIdService";
+import { Role } from '../utils/EnumRole';
 
 export default class ClienteController{
 
@@ -45,13 +46,14 @@ export default class ClienteController{
     public async create(req:Request, res:Response): Promise<Response>{
 
         try{
-            const {nome_cliente, email, senha, logradouro, endereco, cep, numero_endereco} = req.body;
+            const {nome_cliente, role, email, senha, logradouro, endereco, cep, numero_endereco} = req.body;
 
             const criandoCliente = new CriandoClienteService();
     
             const cliente = await criandoCliente.execute({
     
                 nome_cliente,
+                role: role ?? Role[1],
                 email,
                 senha,
                 logradouro,

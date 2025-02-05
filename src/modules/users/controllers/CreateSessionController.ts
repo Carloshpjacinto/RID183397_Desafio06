@@ -22,7 +22,7 @@ export default class SessionsController{
         }catch(error){
 
             console.error('Erro no login:', error);
-            return res.status(401).json({ mensagem: 'incorrect email/password combination.'});
+            return res.status(401).json({ mensagem: 'Erro interno no servidor.'});
         }
     }
 }
