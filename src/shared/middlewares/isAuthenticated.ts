@@ -20,11 +20,12 @@ export default function isAuthenticated(
 
         const decodedToken = verify(token, process.env.APP_SECRET as Secret);
 
-        const {sub} = decodedToken as ITokenPayLoad;
+        const {id, role} = decodedToken as ITokenPayLoad;
 
         req.user = {
 
-            id: sub,
+            id: id,
+            role: role,
         };
 
         return next();
@@ -32,6 +33,5 @@ export default function isAuthenticated(
     }catch{
 
         throw new AppError('Invalid JWT Token.');
-
     }
 }

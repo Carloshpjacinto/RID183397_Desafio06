@@ -17,8 +17,7 @@ export default class CreateSessionsService{
 
         if(!passwordConfirmed) throw new AppError('incorrect email/password combination.', 401);
 
-        const token = sign({}, process.env.APP_SECRET as string, {
-            subject: String(user.id),
+        const token = sign({id: user.id, role: user.role}, process.env.APP_SECRET as string, {
             expiresIn: '1d',
         });
 
